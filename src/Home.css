@@ -1,0 +1,43 @@
+/* App.css */
+
+/* 全局样式 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* 主界面样式 */
+  .App {
+    text-align: center;
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    padding: 20px;
+    color: white;
+  }
+  
+  main {
+    padding: 20px;
+  }
+  
+  footer {
+    background-color: #282c34;
+    padding: 10px;
+    color: white;
+  }
+  
+  /* 子组件样式（假设为MyComponent） */
+  .MyComponent {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+  }
+
+/* 添加图片样式 */
+img {
+    max-width: 30%;
+    height: auto;
+    margin-top: 20px;
+  }
