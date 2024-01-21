@@ -1,43 +1,47 @@
-/* App.css */
+/* Home.css */
 
-/* 全局样式 */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  /* 主界面样式 */
-  .App {
-    text-align: center;
-  }
-  
+.App {
+  /* Your existing styles */
+
   .App-header {
-    background-color: #282c34;
+    background-color: lightblue;
+    /* 添加淡蓝色底色 */
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 20px;
-    color: white;
-  }
-  
-  main {
-    padding: 20px;
-  }
-  
-  footer {
-    background-color: #282c34;
-    padding: 10px;
-    color: white;
-  }
-  
-  /* 子组件样式（假设为MyComponent） */
-  .MyComponent {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-top: 20px;
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .title {
+      margin-right: 20px;
+    }
+
+    .top-bar {
+      background-color: lightblue;
+      /* 添加淡蓝色底色 */
+
+      display: flex;
+
+      .nav-link {
+        margin-right: 10px;
+        cursor: pointer;
+      }
+    }
+
   }
 
-/* 添加图片样式 */
-img {
-    max-width: 30%;
-    height: auto;
+  img {
+    max-width: 300px;
+    /* 限制图片最大宽度为其容器的宽度 */
+    max-height: 300px;
+    /* 限制图片最大高度为300像素，根据需要调整 */
     margin-top: 20px;
+    /* 为了保持上下间距，添加一些顶边距 */
   }
+}
