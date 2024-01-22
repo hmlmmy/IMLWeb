@@ -3,13 +3,17 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import MyComponent from './MyComponent';
-import mainPic from './img/03491-3325640943-1.png';
+import mainPic from './img/62506b5adbeeed37373d05ab70d6b6b8.jpeg';
 
 function Home() {
     const navigate = useNavigate();
 
-    const handleButtonClick = () => {
+    const handleImageClick = () => {
         navigate('/image-page');
+    };
+
+    const handlePostClick = () => {
+        navigate('/posts');
     };
 
     const handleProfileClick = () => {
@@ -28,8 +32,11 @@ function Home() {
                         <div className="nav-link" onClick={() => navigate('/')}>
                             Home
                         </div>
-                        <div className="nav-link" onClick={handleButtonClick}>
+                        <div className="nav-link" onClick={handleImageClick}>
                             Image
+                        </div>
+                        <div className="nav-link" onClick={handlePostClick}>
+                            Posts
                         </div>
                     </div>
                 </div>

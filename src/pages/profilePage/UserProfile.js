@@ -22,7 +22,7 @@ const UserProfile = () => {
 
   const handleSaveClick = async () => {
     try {
-      const response = await axios.put('http://localhost:8080/api/user/1', editedUser);
+      const response = await axios.put('http://localhost:8080/api/user/1999116', editedUser);
       if (response.status === 200) {
         console.log('User data updated successfully');
         setUser({ ...editedUser });
@@ -49,7 +49,7 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/user/1');
+        const response = await axios.get('http://localhost:8080/api/user/1999116');
         if (response.status === 200) {
           console.log(response.data);
           setUser(response.data || defaultUser);
