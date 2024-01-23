@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth } from '../login/AuthContext'; // 请替换为正确的路径
+import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
-  // 假设这是从数据库或其他来源获取的用户信息
+  const { logoutUser } = useAuth();
+  const navigate = useNavigate();
+
   const defaultUser = {
     id: 1,
     username: 'john_doe',
     fullName: 'John Doe',
     email: 'john.doe@example.com',
-    // 其他用户信息...
   };
 
-  // 定义一些可能的操作和状态
   const [user, setUser] = useState(defaultUser);
   const [editing, setEditing] = useState(false);
   const [editedUser, setEditedUser] = useState({ ...defaultUser });
+  const [logoutSuccess, setLogoutSuccess] = useState(false);
 
   const handleEditClick = () => {
     setEditing(true);
@@ -37,8 +40,13 @@ const UserProfile = () => {
 
   const handleCancelClick = () => {
     setEditing(false);
-    // 如果取消编辑，恢复原始用户信息
     setEditedUser({ ...user });
+  };
+
+  const handleLogoutClick = () => {
+    // 在用户注销时调用 logoutUser 方法
+    logoutUser();
+    setLogoutSuccess(true);
   };
 
   const handleInputChange = (e) => {
@@ -64,6 +72,18 @@ const UserProfile = () => {
 
     fetchUser();
   }, []);
+
+  useEffect(() => {
+    if (logoutSuccess) {
+      // 如果注销成功，等待3秒后返回主界面
+      const timeoutId = setTimeout(() => {
+        navigate('/');
+      }, 3000);
+
+      // 在组件卸载时清除定时器，防止内存泄漏
+      return () => clearTimeout(timeoutId);
+    }
+  }, [logoutSuccess, navigate]);
 
   return (
     <div>
@@ -94,8 +114,13 @@ const UserProfile = () => {
           <button onClick={handleCancelClick}>Cancel</button>
         </div>
       ) : (
-        <button onClick={handleEditClick}>Edit Profile</button>
+        <div>
+          <button onClick={handleEditClick}>Edit Profile</button>
+          <button onClick={handleLogoutClick}>Logout</button>
+        </div>
       )}
+
+      {logoutSuccess && <div>Logout successful. Redirecting to the main page in 3 seconds...</div>}
     </div>
   );
 };

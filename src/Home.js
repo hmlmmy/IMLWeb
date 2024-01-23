@@ -1,12 +1,14 @@
 // Home.js
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import MyComponent from './MyComponent';
-import mainPic from './img/62506b5adbeeed37373d05ab70d6b6b8.jpeg';
+import AuthContext from './pages/login/AuthContext';
+import mainPic from './img/publicImage/62506b5adbeeed37373d05ab70d6b6b8.jpeg';
 
 function Home() {
     const navigate = useNavigate();
+    const { isLoggedIn } = useContext(AuthContext);
 
     const handleImageClick = () => {
         navigate('/image-page');
@@ -17,7 +19,11 @@ function Home() {
     };
 
     const handleProfileClick = () => {
-        navigate('/profile-page');
+        if (isLoggedIn) {
+            navigate('/profile-page');
+        } else {
+            navigate('/login');
+        }
     };
 
     return (
@@ -38,10 +44,12 @@ function Home() {
                         <div className="nav-link" onClick={handlePostClick}>
                             Posts
                         </div>
+                        <div className="nav-link" onClick={handleProfileClick}>
+                            Profile
+                        </div>
                     </div>
                 </div>
             </header>
-            <button onClick={handleProfileClick}>Profile</button>
             <main>
                 <MyComponent />
             </main>
