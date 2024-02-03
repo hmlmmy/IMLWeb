@@ -1,6 +1,11 @@
 // PostPage.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import TextField from '@material-ui/core/TextField';
+import TopBar from '../../components/TopBar';
 
 const PostPage = () => {
     const [posts, setPosts] = useState([]);
@@ -45,37 +50,49 @@ const PostPage = () => {
 
     return (
         <div>
+            <TopBar /> 
             <h2>All Posts</h2>
             {posts.map(post => (
-                <div key={post.id}>
-                    <h3>{post.title}</h3>
-                    <p>{post.content}</p>
-                    {/* 显示帖子的其他信息 */}
-
-                    <button onClick={() => handleUpdatePost(post.id, { title: 'Updated Title', content: 'Updated Content' })}>
-                        Update
-                    </button>
-                    <button onClick={() => handleDeletePost(post.id)}>
-                        Delete
-                    </button>
-                </div>
+                <Card key={post.id} style={{ margin: '10px' }}>
+                    <CardContent>
+                        <h3>{post.title}</h3>
+                        <p>{post.content}</p>
+                        {/* 显示帖子的其他信息 */}
+                        <Button variant="contained" onClick={() => handleUpdatePost(post.id, { title: 'Updated Title', content: 'Updated Content' })}>
+                            Update
+                        </Button>
+                        <Button variant="outlined" onClick={() => handleDeletePost(post.id)}>
+                            Delete
+                        </Button>
+                    </CardContent>
+                </Card>
             ))}
-
-            <h2>Create a New Post</h2>
-            <input
-                type="text"
-                placeholder="Title"
-                value={newPost.title}
-                onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
-            />
-            <textarea
-                placeholder="Content"
-                value={newPost.content}
-                onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
-            />
-            <button onClick={handleCreatePost}>
-                Create Post
-            </button>
+                        <h2>Create a New Post</h2>
+            <Card>
+                <CardContent>
+                    <TextField
+                        label="Title"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        value={newPost.title}
+                        onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
+                    />
+                    <TextField
+                        label="Content"
+                        variant="outlined"
+                        fullWidth
+                        multiline
+                        rows={4}
+                        margin="normal"
+                        value={newPost.content}
+                        onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
+                    />
+                    <Button variant="contained" color="primary" onClick={handleCreatePost}>
+                        Create Post
+                    </Button>
+                </CardContent>
+            </Card>
         </div>
     );
 };

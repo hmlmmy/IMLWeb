@@ -5,8 +5,8 @@ import React from 'react';
 function MyComponent() {
   return (
     <div>
-      <h2>这是我的子组件</h2>
-      <p>这里是子组件的内容。</p>
+      <h2>质疑幻魔，理解幻魔，成为幻魔</h2>
+      <p>。。。。。。</p>
     </div>
   );
 }

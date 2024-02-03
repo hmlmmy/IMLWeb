@@ -33,7 +33,15 @@
         cursor: pointer;
       }
     }
+  }
 
+  main {
+    width: 100%;
+    max-width: 1200px; /* 设置一个最大宽度，以防视频太宽 */
+    margin: 0 auto; /* 居中 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   img {

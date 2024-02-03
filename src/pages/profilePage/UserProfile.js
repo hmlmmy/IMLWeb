@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useAuth } from '../login/AuthContext'; // 请替换为正确的路径
+import { useAuth } from '../login/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import TopBar from '../../components/TopBar';
 
 const UserProfile = () => {
   const { logoutUser } = useAuth();
@@ -87,40 +92,55 @@ const UserProfile = () => {
 
   return (
     <div>
-      <h2>User Profile</h2>
-      <div>
-        <strong>ID:</strong> {user.id}
-      </div>
-      <div>
-        <strong>Username:</strong>{' '}
-        {editing ? (
-          <input
-            type="text"
-            name="username"
-            value={editedUser.username}
-            onChange={handleInputChange}
-          />
-        ) : (
-          user.username
-        )}
-      </div>
-      <div>
-        <strong>Email:</strong> {user.email}
-      </div>
+      <TopBar />
+      <Card>
+        <CardContent>
+          <div>
+            <h2>User Profile</h2>
+            <div>
+              <strong>ID:</strong> {user.id}
+            </div>
+            <div>
+              <strong>Username:</strong>{' '}
+              {editing ? (
+                <TextField
+                  type="text"
+                  name="username"
+                  value={editedUser.username}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                user.username
+              )}
+            </div>
+            <div>
+              <strong>Email:</strong> {user.email}
+            </div>
 
-      {editing ? (
-        <div>
-          <button onClick={handleSaveClick}>Save</button>
-          <button onClick={handleCancelClick}>Cancel</button>
-        </div>
-      ) : (
-        <div>
-          <button onClick={handleEditClick}>Edit Profile</button>
-          <button onClick={handleLogoutClick}>Logout</button>
-        </div>
-      )}
+            {editing ? (
+              <div>
+                <Button variant="contained" onClick={handleSaveClick}>
+                  Save
+                </Button>
+                <Button variant="outlined" onClick={handleCancelClick}>
+                  Cancel
+                </Button>
+              </div>
+            ) : (
+              <div>
+                <Button variant="contained" onClick={handleEditClick}>
+                  Edit Profile
+                </Button>
+                <Button variant="outlined" onClick={handleLogoutClick}>
+                  Logout
+                </Button>
+              </div>
+            )}
 
-      {logoutSuccess && <div>Logout successful. Redirecting to the main page in 3 seconds...</div>}
+            {logoutSuccess && <div>Logout successful. Redirecting to the main page in 3 seconds...</div>}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
